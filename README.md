@@ -1,5 +1,7 @@
 # STEPS
 
+All the YAML files referred here are included in this repo
+
 ### -- Automated with Terraform --
 
 **1) Create a GKE cluster**
@@ -130,7 +132,7 @@ EOF
    
 **10) Deploy a basic 'Hello World' web application**
 
-web-deployment.yaml:
+`web-deployment.yaml:`
 ```
 apiVersion: apps/v1
 kind: Deployment
@@ -161,7 +163,7 @@ spec:
 **11) Create a Backend configuration to be used with the exposed Service**
  - Defining the IAP enabled
 
-backend-config.yaml:
+`backend-config.yaml:`
 ``` 
 apiVersion: cloud.google.com/v1
 kind: BackendConfig
@@ -181,7 +183,7 @@ spec:
 **12) Deploy a Service as a Network Endpoint Group (NEG)**
  - Including a backend-config annotation reference
 
-web-service.yaml:
+`web-service.yaml:`
 ```
 apiVersion: v1
 kind: Service
@@ -208,7 +210,7 @@ spec:
  - Mapping the URL to `web.example.com`
  - Setting the TLS secret created before
  
-ilb-ingress.yaml:
+`ilb-ingress.yaml:`
 ```
 apiVersion: networking.k8s.io/v1
 kind: Ingress
