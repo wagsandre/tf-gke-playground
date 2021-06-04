@@ -11,6 +11,8 @@ All the other `.tf` files don't need to be configured, unless you prefer to set 
 
 All the YAML files referred here are included in this repo at `./gke-config` folder
 
+***The project creation, the service API's and the necessary IAM roles are not covered in this documentation***
+
 ---
 
 ## STEPS
