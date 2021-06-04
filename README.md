@@ -4,7 +4,7 @@ Use the `terraform.tfvars` to set up your GCP project environment variables requ
 
 All the other `.tf` files don't need to be configured. Do it if you prefer to set some different configurations.
 
-All the YAML files referred here are included in this repo.
+All the YAML files referred here are included in this repo at `./gke-config` folder
 
 ---
 
