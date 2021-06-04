@@ -129,7 +129,8 @@ EOF
    
    
 **10) Deploy a basic 'Hello World' web application**
- - web-deployment.yaml:
+
+web-deployment.yaml:
 ```
 apiVersion: apps/v1
 kind: Deployment
@@ -157,8 +158,10 @@ spec:
 
   `kubectl apply -f web-deployment.yaml`
    
-**11) Create a Backend configuration to be used with the exposed Service which defines the IAP enabled**
- - backend-config.yaml:
+**11) Create a Backend configuration to be used with the exposed Service**
+ - Defining the IAP enabled
+
+backend-config.yaml:
 ``` 
 apiVersion: cloud.google.com/v1
 kind: BackendConfig
@@ -177,7 +180,8 @@ spec:
 
 **12) Deploy a Service as a Network Endpoint Group (NEG)**
  - Including a backend-config annotation reference
- - web-service.yaml:
+
+web-service.yaml:
 ```
 apiVersion: v1
 kind: Service
@@ -201,7 +205,10 @@ spec:
     `kubectl apply -f web-service.yaml`
 
 **13) Deploy an Ingress controller as "gce-internal" class**
- - ilb-ingress.yaml:
+ - Mapping the URL to `web.example.com`
+ - Setting the TLS secret created before
+ 
+ilb-ingress.yaml:
 ```
 apiVersion: networking.k8s.io/v1
 kind: Ingress
