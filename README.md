@@ -21,7 +21,7 @@
 
 ref: https://console.cloud.google.com/apis/credentials/consent
 
-### -- end Automated with TF --
+### -- end Automated with Terraform --
 
 **5) Create the OAuth credentials via Cloud Console**
  - ref: https://console.cloud.google.com/apis/credentials
@@ -155,9 +155,9 @@ spec:
 ```
  **10.1) Apply the configuration**
 
-   `kubectl apply -f web-deployment.yam`
+  `kubectl apply -f web-deployment.yaml`
    
-**11) Create a Backend configuration to be used with the exposed Service witch defines the IAP enabled**
+**11) Create a Backend configuration to be used with the exposed Service which defines the IAP enabled**
  - backend-config.yaml:
 ``` 
 apiVersion: cloud.google.com/v1
