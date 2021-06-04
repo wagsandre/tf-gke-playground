@@ -1,8 +1,13 @@
 # GKE + ILB + IAP enabled
 
+## Summary
+This repo is an example to configure a Google Internal HTTPS Load Balancer integrated with a GKE web application using the Identity-Aware Proxy to application Authentication and Autorization.
+
+Part of this project is deployed with Terraform and some other configurations completed using Google Cloud Shell and Kubectl commands.
+
 Use the `terraform.tfvars` to set up your GCP project environment variables required for this project.
 
-All the other `.tf` files don't need to be configured. Do it if you prefer to set some different configurations.
+All the other `.tf` files don't need to be configured, unless you prefer to set up some different configurations.
 
 All the YAML files referred here are included in this repo at `./gke-config` folder
 
@@ -14,10 +19,11 @@ All the YAML files referred here are included in this repo at `./gke-config` fol
 
 **1) Create a GKE cluster**
  - With VPC Native enabled
+ - 1 Node for each zone in the region (n1-standard-1 with default CoS image)
 
 **2) Create:**
  - a Proxy-only subnet in the same VPC/region used for GKE
- - a RemoteDesktop VM instance to test the IAP functionality
+ - a RemoteDesktop VM instance to test the IAP functionality (e2-standard-2 with Debian image)
 
    ref: https://cloud.google.com/architecture/chrome-desktop-remote-on-compute-engine
 
