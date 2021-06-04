@@ -8,24 +8,27 @@
 **2) Create:**
  - a Proxy-only subnet in the same VPC/region used for GKE
  - a RemoteDesktop VM instance to test the IAP functionality
-   (https://cloud.google.com/architecture/chrome-desktop-remote-on-compute-engine)
+
+   ref: https://cloud.google.com/architecture/chrome-desktop-remote-on-compute-engine
 
 **3) Enable the necessary API's**
  - Cloud IAP API (iap.googleapis.com)
  - Identity Toolkit API (identitytoolkit.googleapis.com)
  
 **4) Configure the OAuth consent screen**
-(https://console.cloud.google.com/apis/credentials/consent)
+
+ref: https://console.cloud.google.com/apis/credentials/consent
 
 ### -- end Automated with TF --
 
-**5) Create the OAuth credentials via Cloud Console ***
- - (https://console.cloud.google.com/apis/credentials)
+**5) Create the OAuth credentials via Cloud Console**
+ - ref: https://console.cloud.google.com/apis/credentials
  - Set OAuth client ID / Web Application
  - then, back to clientID configuration and set the Authorized redirect URIs field like:
-  https://iap.googleapis.com/v1/oauth/clientIds/[CLIENT_ID]:handleRedirect
+  `https://iap.googleapis.com/v1/oauth/clientIds/[CLIENT_ID]:handleRedirect`
 
  **5.1) Or Through the Cloud Shell**
+
    `gcloud alpha iap oauth-clients create projects/[PROJECT_ID]/brands/[BRAND-ID] --display_name=[NAME]`
  
 ### -- Performed through the Cloud Shell --
@@ -46,11 +49,12 @@
 **8) Create a self-signed TLS Certificate to be used with the HTTPS LoadBalancer**
 
  **8.1) Generate a private key**
+
  `openssl genrsa -out tls.key 2048`
 
  **8.2) Create a CSR config file**
-   - Fill the DNS.1 field with your domain name. 
-   - Ex `*.example.com` - valid for any prefix host of `example.com` domain
+   - Fill the `DNS.1` field with your domain name. 
+   - Ex: `*.example.com` (using a wildcard) - valid for any prefix host of `example.com` domain
  ```
  cat <<'EOF' >csr_config
 [req]
@@ -87,11 +91,17 @@ EOF
  **8.3.1) Example of inputed fields**
 
 >Country Name (2 letter code) []:ES
+
 >State or Province Name (full name) []:BCN
+
 >Locality Name (eg, city) []:BCN
+
 >Organization Name (eg, company) []:Test
+
 >Organizational Unit Name (eg, section) []:Admin
+
 >Common Name (e.g. server FQDN or YOUR name) []:example.com
+
 >Email Address []:admin@example.com
 
  **8.4) Create the self-signed TLS file (PEM format):**
@@ -142,6 +152,7 @@ spec:
           protocol: TCP 
 ```
  **10.1) Apply the configuration**
+
    `kubectl apply -f web-deployment.yam`
    
 **11) Create a Backend configuration to be used with the exposed Service witch defines the IAP enabled**
@@ -157,13 +168,14 @@ spec:
     enabled: true
     oauthclientCredentials:
       secretName: iap-secret
-```	  
+```
   **11.1) Apply the configuration**
+
     `kubectl apply -f backend-config.yaml`
 
 **12) Deploy a Service as a Network Endpoint Group (NEG)**
  - Including a backend-config annotation reference
- - web-service.yaml
+ - web-service.yaml:
 ```
 apiVersion: v1
 kind: Service
@@ -183,10 +195,11 @@ spec:
   type: NodePort
 ```
   **12.1) Apply the configuration**
+
     `kubectl apply -f web-service.yaml`
 
 **13) Deploy an Ingress controller as "gce-internal" class**
- - ilb-ingress.yaml
+ - ilb-ingress.yaml:
 ```
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -213,12 +226,16 @@ spec:
               number: 8080
 ```
   **13.1) Apply the configuration**
+
     `kubectl apply -f ilb-ingress.yaml`
   
 ---
 
 Once finished the configuration you might test the IAP functionality connecting throught the RemoteDesktop VM instance created with Terraform, and setting up the `/etc/hosts` with the ILB IP address to resolve to `web.example.com`, for example:
- `echo "10.10.0.10    web.example.com" >> /etc/hosts`
+
+ `echo "10.10.0.10    web.example.com" >> /etc/hosts` 
+ 
+ being `10.10.0.10` the ILB IP address
 
 Then accessing the webpage via browser to https://web.example.com
 
