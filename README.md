@@ -1,6 +1,14 @@
-# STEPS
+# GKE + ILB + IAP enabled
 
-All the YAML files referred here are included in this repo
+Use the `terraform.tfvars` to set up your GCP project environment variables required for this project.
+
+All the other `.tf` files don't need to be configured. Do it if you prefer to set some different configurations.
+
+All the YAML files referred here are included in this repo.
+
+---
+
+## STEPS
 
 ### -- Automated with Terraform --
 
