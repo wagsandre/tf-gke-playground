@@ -11,8 +11,8 @@
 
    ref: https://cloud.google.com/architecture/chrome-desktop-remote-on-compute-engine
 
- - Firewall rules to access the RDP machin
- 
+ - Firewall rules to access the RDP machine
+
 **3) Enable the necessary API's**
  - Cloud IAP API (iap.googleapis.com)
  - Identity Toolkit API (identitytoolkit.googleapis.com)
