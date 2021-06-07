@@ -59,7 +59,7 @@ ref: https://console.cloud.google.com/apis/credentials/consent
  gcloud container clusters get-credentials [CLUSTER_NAME] --region [REGION]
  ```
  
-**7) Create a Kubernetes secret to IAP**
+**7) Create a Kubernetes secret for IAP**
   - [CLIENT_ID] and [CLIENT_SECRET] created in the step 5
 ```
  kubectl create secret generic iap-secret --from-literal=client_id=[CLIENT_ID] \
@@ -137,13 +137,13 @@ EOF
  `openssl x509 -in tls.cert -text -noout`
 
 
-**9) Create the Kubernetes secret with the generated certificate:**
+**9) Create a Kubernetes secret with the generated certificate:**
 
  `kubectl create secret tls tls-secret --cert=tls.cert --key=tls.key`
 
  **9.1) Check the generated secrets:**
  
-   `kubectl get secrets`
+  `kubectl get secrets`
    
    
 **10) Deploy a basic 'Hello World' web application**
@@ -192,9 +192,10 @@ spec:
     oauthclientCredentials:
       secretName: iap-secret
 ```
-  **11.1) Apply the configuration**
 
-    `kubectl apply -f backend-config.yaml`
+  **11.1) Apply the configuration**
+  
+  `kubectl apply -f backend-config.yaml`
 
 **12) Deploy a Service as a Network Endpoint Group (NEG)**
  - Including a backend-config annotation reference
@@ -219,8 +220,8 @@ spec:
   type: NodePort
 ```
   **12.1) Apply the configuration**
-
-    `kubectl apply -f web-service.yaml`
+  
+  `kubectl apply -f web-service.yaml`
 
 **13) Deploy an Ingress controller as "gce-internal" class**
  - Mapping the URL to `web.example.com`
@@ -253,8 +254,8 @@ spec:
               number: 8080
 ```
   **13.1) Apply the configuration**
-
-    `kubectl apply -f ilb-ingress.yaml`
+  
+  `kubectl apply -f ilb-ingress.yaml`
   
 ---
 
