@@ -266,4 +266,4 @@ Once finished the configuration you might test the IAP functionality connecting 
 
 Then accessing the webpage via browser to https://web.example.com
 
-**Note**: The user must have the ***IAP-secured Web App User*** IAM role permission to get access permission, otherwise it will get the ***Denied*** alert page. I recommend you test the both situations.
+**Note**: The user must have the ***IAP-secured Web App User*** IAM role permission to get access permission, otherwise it will get the ***Denied*** alert page. I recommend you test both situations.
