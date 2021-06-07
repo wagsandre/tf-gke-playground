@@ -23,8 +23,8 @@ All the YAML files referred here are included in this repo at `./gke-config` fol
  - With VPC Native enabled
  - 1 Node for each zone in the region (n1-standard-1 with default CoS image)
 
-**2) Create:**
- - a Proxy-only subnet in the same VPC/region used for GKE
+**2) Create other infrastructure dependencies for environment test:**
+ - a Proxy-only subnet in the same VPC/region for Internal HTTPS Load Balancer
  - a RemoteDesktop VM instance to test the IAP functionality (e2-standard-2 with Debian image)
 
    ref: https://cloud.google.com/architecture/chrome-desktop-remote-on-compute-engine
@@ -51,7 +51,7 @@ ref: https://console.cloud.google.com/apis/credentials/consent
 
    `gcloud alpha iap oauth-clients create projects/[PROJECT_ID]/brands/[BRAND-ID] --display_name=[NAME]`
  
-### -- Performed through the Cloud Shell --
+### -- Manually performed through the Cloud Shell --
 
 **6) Get access to the project and GKE cluster**
 ```
